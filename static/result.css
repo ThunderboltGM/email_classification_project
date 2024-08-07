@@ -1,0 +1,16 @@
+.main_heading{
+    color: orange;
+    text-align: center;
+}
+.result_div{
+    background-color: yellowgreen;
+    border: 0.25rem,solid,black;
+    width: 15rem;
+    height: 10rem;
+    border-radius: 2rem;
+    font-size: 1.5rem;
+    margin-left: 40%;
+}
+.result_div p{
+    margin-left: 2rem;
+}

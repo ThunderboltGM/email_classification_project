@@ -1,0 +1,15 @@
+.main_heading{
+    color: orange;
+    text-align: center;
+}
+.form_div{
+    margin-left: 40%;
+}
+#input{
+    width: 10rem;
+    height: 10rem;
+}
+#submit_button{
+    background-color: yellowgreen;
+    margin-left: 4.5rem;
+}
