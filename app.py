@@ -20,9 +20,10 @@ def project():
 @app.route('/prediction',methods=['POST','GET'])
 def prediction():
     if request.method == 'POST':
+        conn = sqlite3.connect('userData.db')
         messege = request.form['messege']
-        messege = messege.lower()
-        final_messege = re.sub("[^a-zA-Z ]","",messege)
+        lowerCaseMessege = messege.lower()
+        final_messege = re.sub("[^a-zA-Z ]","",lowerCaseMessege)
         final_messege_array = countVectorizer.transform([final_messege]).toarray()
 
         label = {1:'HAM!',0:'SPAM!'}
@@ -30,6 +31,18 @@ def prediction():
         prediction = bnb.predict(final_messege_array)[0]
 
         prediction = label[prediction]
+
+        databaseMessege = (messege,prediction)
+
+        insertionQuerry = """
+        insert into email values(?,?)
+        """
+        cur = conn.cursor()
+        cur.execute(insertionQuerry,databaseMessege)
+        conn.commit()
+        print('data stored in database successfully!')
+        cur.close()
+        conn.close()
 
         return render_template('result.html',output = str(prediction))
 
